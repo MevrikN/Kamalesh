@@ -1,26 +1,25 @@
-package utils;
+package pages;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import utils.Utils;
 
-public class Driver {
-
-    private static WebDriver driver;
+public class Manager extends Utils {
 
     public static WebDriver getDriver() {
 
-        WebDriverManager.chromedriver().setup();
+       WebDriverManager.chromedriver().setup();
 
-        driver = new ChromeDriver();
+       driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         Runtime.getRuntime().addShutdownHook(new Thread("Driver shutdown thread") {
             public void run() {
                 driver.quit();
-            }
+         }
         });
 
-        return driver;
+       return driver;
     }
 }
